@@ -10,6 +10,8 @@
 #include <QRect>
 #include <QPixmap>
 #include <QSoundEffect>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 #include "gameobjects.h"
 
 enum GameState {
@@ -17,7 +19,8 @@ enum GameState {
     Guide,      // 游戏指南
     Options,    // 设置选项 (新加)
     Playing,    // 游戏中
-    GameOver    // 游戏结束
+    GameOver,    // 游戏结束
+    GameWin
 };
 
 class MainWindow : public QMainWindow
@@ -46,6 +49,8 @@ private:
     int money;
     int baseHp;
     int spawnTimer;
+    int totalEnemies; // <--- 新增：这关总共要刷多少怪
+    int spawnedCount; // <--- 新增：已经刷了多少怪
 
     // --- 界面与多媒体 ---
     QPixmap menuBgImg;      // 菜单背景图
@@ -53,6 +58,8 @@ private:
 
     QSoundEffect *clickSound;
     QSoundEffect *laserSound;
+    QMediaPlayer *bgmPlayer;
+    QAudioOutput *audioOutput;
 
     // --- 菜单按钮区域 ---
     QRect startBtnRect;
